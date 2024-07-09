@@ -1,17 +1,6 @@
 import { Component, Input, Output, EventEmitter, output, input } from '@angular/core';
-
-//can define types
-type UserType = {
-  id: string,
-  name: string,
-  avatar: string
-}
-//also a way to define types
-interface IUser {
-  id: string,
-  name: string,
-  avatar: string
-}
+import {  User } from './user.model';
+import { CardComponent } from "../shared/card/card.component";
 
 
 
@@ -19,17 +8,14 @@ interface IUser {
 @Component({
   selector: 'app-user',
   standalone: true,
-  imports: [],
+  imports: [CardComponent],
   templateUrl: './user.component.html',
   styleUrl: './user.component.css'
 })
 export class UserComponent {
   //normal, input decorator
-  @Input({ required: true }) user!: {
-    id: string,
-    name: string,
-    avatar: string
-  };
+  @Input({ required: true }) user!: User;
+  @Input({required:true}) selected!:boolean
   @Output() select = new EventEmitter<string>(); //output decorator
   // select = output<string>() //same as above, but shorter and new
   //using signals 
